@@ -105,4 +105,3 @@ This project is a role-based Attendance Management System with a responsive UI f
 
 ---
 
-This README provides a clear, actionable roadmap for completing the frontend project in 4 days. Let me know if you need further adjustments!
