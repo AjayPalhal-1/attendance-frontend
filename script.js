@@ -1,17 +1,20 @@
-document.getElementById('role').addEventListener('change', function () {
-    const role = this.value;
-    const studentFields = document.getElementById('studentFields');
-  
-    // Show or hide fields based on the selected role
-    if (role === 'student') {
+document.addEventListener('DOMContentLoaded', function () {
+  const roleSelect = document.getElementById('role');
+  const studentFields = document.getElementById('studentFields');
+  const teacherFields = document.getElementById('teacherFields');
+
+  roleSelect.addEventListener('change', function () {
+    const selectedRole = roleSelect.value;
+
+    // Hide all role-specific fields initially
+    studentFields.classList.add('hidden');
+    teacherFields.classList.add('hidden');
+
+    // Display fields based on role
+    if (selectedRole === 'student') {
       studentFields.classList.remove('hidden');
-    } else {
-      studentFields.classList.add('hidden');
+    } else if (selectedRole === 'teacher') {
+      teacherFields.classList.remove('hidden');
     }
   });
-  
-  document.getElementById('registrationForm').addEventListener('submit', function (event) {
-    event.preventDefault();
-    alert('Form submitted successfully!');
-  });
-  
+});
