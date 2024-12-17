@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <header>USER LOGIN</header>
+        <form>
+            <!-- Username Field -->
+            <div class="field">
+                <div class="input-area">
+                    <span class="icon">&#128100;</span> <!-- User Icon -->
+                    <input type="text" id="username" placeholder="Username" required>
+                </div>
+                <div id="username-error" class="error-txt"></div>
+            </div>
+
+            <!-- Password Field -->
+            <div class="field">
+                <div class="input-area">
+                    <span class="icon">&#128274;</span> <!-- Lock Icon -->
+                    <input type="password" id="password" placeholder="Password" required>
+                    <span class="toggle-password" id="toggle-password">&#128065;</span> <!-- Eye Icon -->
+                </div>
+                <div id="password-error" class="error-txt"></div>
+            </div>
+
+            <!-- Remember Me and Forgot Password -->
+            <div class="pass-txt">
+                <label>
+                    <input type="checkbox" id="remember-me"> Remember Me
+                </label>
+                <a href="#" id="forgot-password-link">Forgot Password?</a>
+            </div>
+
+            <!-- Sign In Button -->
+            <input type="submit" value="Sign In">
+        </form>
+    </div>
+
+    <!-- Forgot Password Modal -->
+    <div class="modal" id="forgot-password-modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-modal">&times;</span>
+            <h2>Reset Password</h2>
+            <p>Enter your email to reset your password:</p>
+            <input type="email" id="forgot-email" placeholder="Enter your email" required>
+            <button id="send-reset-link">Send Reset Link</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
