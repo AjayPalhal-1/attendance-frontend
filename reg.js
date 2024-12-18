@@ -6,11 +6,19 @@ document.addEventListener('DOMContentLoaded', function () {
   roleSelect.addEventListener('change', function () {
     const selectedRole = roleSelect.value;
 
+<<<<<<< HEAD
     // Hide all role-specific fields initially
     studentFields.classList.add('hidden');
     teacherFields.classList.add('hidden');
 
     // Display fields based on role
+=======
+    
+    studentFields.classList.add('hidden');
+    teacherFields.classList.add('hidden');
+
+    
+>>>>>>> 7b8e10c (login and rge mix)
     if (selectedRole === 'student') {
       studentFields.classList.remove('hidden');
     } else if (selectedRole === 'teacher') {
