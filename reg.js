@@ -17,4 +17,15 @@ document.addEventListener('DOMContentLoaded', function () {
       teacherFields.classList.remove('hidden');
     }
   });
+
+  const registrationForm = document.getElementById('registrationForm');
+  registrationForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    // Simulate successful registration
+    alert('Registration successful! Redirecting to login page...');
+    
+    // Redirect to login page after registration
+    window.location.href = 'login.html';
+  });
 });
