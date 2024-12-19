@@ -1,0 +1,140 @@
+/* General Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000; /* Dark background */
+    color: #fff; /* Text color for dark theme */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Container for Dashboard */
+  .dashboard-container {
+    width: 350px;
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent dark background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    text-align: center;
+  }
+  
+  /* Header Section */
+  .dashboard-header {
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-header h1 {
+    font-size: 24px;
+    font-weight: 500;
+    color: #fff;
+  }
+  
+  #username-display {
+    color: #00d9ff; /* Light blue color for username */
+  }
+  
+  #logout-btn {
+    margin-top: 10px;
+    padding: 8px 15px;
+    background: #00d9ff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+  }
+  
+  #logout-btn:hover {
+    background: #0073e6;
+  }
+  
+  /* Profile Section */
+  .profile-section {
+    margin-top: 20px;
+  }
+  
+  .profile-section h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #00d9ff; /* Light blue color */
+  }
+  
+  .profile-info p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    color: #bbb; /* Light gray for profile information */
+  }
+  
+  .profile-info strong {
+    color: #fff; /* White color for labels */
+  }
+  
+  /* Settings Section */
+  .settings-section {
+    margin-top: 30px;
+  }
+  
+  .settings-section h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #00d9ff; /* Light blue color */
+  }
+  
+  .settings-section button {
+    width: 100%;
+    padding: 8px 0;
+    background: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-bottom: 15px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .settings-section button:hover {
+    background: #00d9ff;
+  }
+  
+  .settings-section #update-profile-btn {
+    background: #00d9ff;
+  }
+  
+  .settings-section #change-password-btn {
+    background: #444;
+  }
+  
+  /* Activity Section */
+  .activity-section {
+    margin-top: 30px;
+  }
+  
+  .activity-section h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: #00d9ff; /* Light blue color */
+  }
+  
+  .activity-section ul {
+    list-style-type: none;
+    padding: 0;
+    color: #bbb; /* Light gray color */
+  }
+  
+  .activity-section li {
+    margin-bottom: 8px;
+    font-size: 14px;
+  }
+  
+  /* Media Queries for Responsiveness */
+  @media (max-width: 768px) {
+    .dashboard-container {
+      width: 90%;
+    }
+  }
+  

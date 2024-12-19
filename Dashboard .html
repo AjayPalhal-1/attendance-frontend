@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile - Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <header class="dashboard-header">
+            <h1>Welcome, <span id="username-display">Username</span></h1>
+            <button id="logout-btn">Logout</button>
+        </header>
+        
+        <!-- Profile Section -->
+        <div class="profile-section">
+            <h2>Your Profile</h2>
+            <div class="profile-info">
+                <p><strong>Name:</strong> <span id="name-display">John Doe</span></p>
+                <p><strong>Email:</strong> <span id="email-display">john.doe@example.com</span></p>
+                <p><strong>Role:</strong> <span id="role-display">Student</span></p>
+            </div>
+        </div>
+
+        <!-- Settings Section -->
+        <div class="settings-section">
+            <h2>Account Settings</h2>
+            <button id="change-password-btn">Change Password</button>
+            <button id="update-profile-btn">Update Profile</button>
+        </div>
+
+        <!-- Activity Section -->
+        <div class="activity-section">
+            <h2>Your Recent Activity</h2>
+            <ul id="activity-list">
+                <li>Logged in on 20th Dec 2024</li>
+                <li>Updated profile on 18th Dec 2024</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>
