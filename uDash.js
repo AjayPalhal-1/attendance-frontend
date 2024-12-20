@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
     };
 
     let isEditable = false; // Tracks whether fields are editable
-    const role = localStorage.getItem("userRole") || "admin"; // Fetch role, default to 'student'
+    const role = localStorage.getItem("userRole") || "teacher"; // Fetch role, default to 'student'
 
     const profileInfoContainer = document.getElementById("profile-info");
     const updateProfileButton = document.getElementById("update-profile-btn");
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", function () {
         isEditable = !isEditable; // Toggle edit mode
         const inputs = profileInfoContainer.querySelectorAll("input, select");
         inputs.forEach(input => {
-            if (input.id !== "username") {
+            if (input.id !== "username" &&  input.id !== "name") {
                 input.readOnly = !isEditable;
                 input.disabled = !isEditable;
             }
@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // Save the updated data
             const updatedProfile = {
                 username: profilesData[role].username, // Username remains unchanged
-                name: document.getElementById("name").value,
+                // name: document.getElementById("name").value,
                 mobile: document.getElementById("mobile").value,
                 dob: document.getElementById("dob").value,
                 password: document.getElementById("password").value,

@@ -1,67 +1,151 @@
-body {
-    font-family: Arial, sans-serif;
+/* Reset margins, paddings, and borders */
+* {
     margin: 0;
     padding: 0;
-    background-color: #f9f9f9;
+    box-sizing: border-box;
 }
 
-.dashboard-container {
-    width: 90%;
-    max-width: 800px;
-    margin: 20px auto;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+/* General body styling */
+body {
+    font-family: 'Poppins', Arial, sans-serif; /* Modern font for a clean look */
+    background-color: #f3f3f3; /* Subtle light background */
+    color: #333; /* Neutral text color */
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
     padding: 20px;
 }
 
-.dashboard-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+/* Container styles */
+.dashboard-container, .profile-card {
+    background-color: #fff; /* Bright background for contrast */
+    border-radius: 10px; /* Smooth rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+    padding: 20px;
+    max-width: 400px;
+    width: 100%;
+    margin: 10px auto;
 }
 
-.dashboard-header h1 {
-    font-size: 24px;
+/* Remove borders from inputs, selects, and buttons */
+input, select, button {
+    border: none;
+    outline: none;
+    background-color: transparent;
+}
+
+/* Style specific input fields */
+input[type="text"], input[type="password"], select {
+    background-color: #f9f9f9; /* Subtle input background */
+    border-radius: 5px;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
     color: #333;
+    margin-bottom: 15px;
+    transition: box-shadow 0.3s ease;
 }
 
-.dashboard-header button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+input[type="text"]:focus, input[type="password"]:focus, select:focus {
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.5); /* Highlight focus */
 }
 
-.dashboard-header button:hover {
-    background-color: #0056b3;
-}
-
-.profile-section, .settings-section, .activity-section {
-    margin-bottom: 20px;
-}
-
-.profile-section h2, .settings-section h2, .activity-section h2 {
-    margin-bottom: 10px;
-    color: #555;
-}
-
-.profile-info p {
-    margin: 10px 0;
-}
-
+/* Button styling */
 button {
-    padding: 10px 15px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    transition: all 0.3s ease;
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #0056b3;
+    transform: translateY(-2px); /* Slight lift on hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Shadow for effect */
+}
+
+/* Custom styling for labels */
+label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 5px;
+    display: block;
+}
+
+/* Logout button styling */
+.logout-button {
+    background-color: #dc3545; /* Red button for emphasis */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-align: center;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+    background-color: #c82333;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* List styles */
+ul, li {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Profile sections */
+.profile-section {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.recent-activity {
+    background-color: #f1f1f1;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
+}
+
+/* Subtle animations for elements */
+.dashboard-container, .profile-card, input, button {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Add responsiveness */
+@media (max-width: 600px) {
+    .dashboard-container, .profile-card {
+        padding: 15px;
+        box-shadow: none; /* Simpler design on smaller screens */
+    }
+
+    button, .logout-button {
+        padding: 8px 15px;
+        font-size: 14px;
+    }
 }
