@@ -1,108 +1,78 @@
-document.addEventListener("DOMContentLoaded", function () {
-    // Dummy records
-    const profilesData = {
-        student: {
-            username: "student@example.com",
-            name: "Amol Pawar",
-            mobile: "9876543210",
-            dob: "2004-07-15",
-            password: "student123",
-            gender: "male",
-            attendance: 24,
-        },
-        teacher: {
-            username: "teacher@example.com",
-            name: "Ajay  Palhal",
-            mobile: "9123456789",
-            dob: "1985-03-22",
-            password: "teacher123",
-            gender: "female",
-            subject: "Physics",
-            experience: 12,
-        },
-        admin: {
-            username: "admin@example.com",
-            name: "Ankush Pawar",
-            mobile: "9812345678",
-            dob: "1975-12-01",
-            password: "admin123",
-            gender: "male",
-        },
-    };
+document.addEventListener("DOMContentLoaded", async function () {
+  const usernameDisplay = document.getElementById("username-display");
+  const profileInfo = document.getElementById("profile-info");
 
-    let isEditable = false; // Tracks whether fields are editable
-    const role = localStorage.getItem("userRole") || "admin"; // Fetch role, default to 'student'
+  // Extract query parameters from the URL
+  const queryParams = new URLSearchParams(window.location.search);
+  const userId = queryParams.get("userId"); // Get userId directly
+  //   console.log("Extracted userId:", userId);
 
-    const profileInfoContainer = document.getElementById("profile-info");
-    const updateProfileButton = document.getElementById("update-profile-btn");
+  if (!userId) {
+    alert("No user data found. Redirecting to the login page.");
+    window.location.href = "login.html";
+    return;
+  }
 
-    // Render profile data based on role
-    function renderProfile(data) {
-        const commonFields = `
-            <p><strong>Username (Email):</strong> <span id="username">${data.username}</span></p>
-            <p><strong>Name:</strong> <input type="text" id="name" value="${data.name}" readonly></p>
-            <p><strong>Mobile Number:</strong> <input type="text" id="mobile" value="${data.mobile}" readonly></p>
-            <p><strong>Date of Birth:</strong> <input type="date" id="dob" value="${data.dob}" readonly></p>
-            <p><strong>Password:</strong> <input type="password" id="password" value="${data.password}" readonly></p>
-            <p><strong>Gender:</strong> 
-                <select id="gender" disabled>
-                    <option value="male" ${data.gender === "male" ? "selected" : ""}>Male</option>
-                    <option value="female" ${data.gender === "female" ? "selected" : ""}>Female</option>
-                    <option value="other" ${data.gender === "other" ? "selected" : ""}>Other</option>
-                </select>
-            </p>`;
+  try {
+    const currentDate = new Date();
 
-        let roleSpecificFields = "";
-        if (role === "student") {
-            roleSpecificFields = `<p><strong>Total Attendance Count (This Month):</strong> <span id="attendance">${data.attendance}</span></p>`;
-        } else if (role === "teacher") {
-            roleSpecificFields = `
-                <p><strong>Subject:</strong> <input type="text" id="subject" value="${data.subject}" readonly></p>
-                <p><strong>Experience (Years):</strong> <input type="number" id="experience" value="${data.experience}" readonly></p>`;
-        }
+    // Format the date
+    const options = { day: "numeric", month: "short", year: "numeric" };
+    const formattedDate = currentDate.toLocaleDateString("en-GB", options);
 
-        profileInfoContainer.innerHTML = commonFields + roleSpecificFields;
+    // Display the date
+    document.getElementById(
+      "currentDate"
+    ).textContent = `Current system date: ${formattedDate}`;
+    // Properly encode the userId to handle special characters like @
+    const encodedUserId = encodeURIComponent(userId);
+    // console.log("Encoded userId:", encodedUserId);
+    const fetchUrl = `http://localhost:5000/profile?email=${encodedUserId}`;
+    // console.log("Fetching URL:", fetchUrl);
+
+    // Fetch user data from the server
+    const response = await fetch(fetchUrl);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch user data. Status: ${response.status}`);
     }
 
-    // Initialize profile based on role
-    renderProfile(profilesData[role]);
+    const userData = await response.json();
 
-    // Enable editing when "Update Profile" is clicked
-    updateProfileButton.addEventListener("click", function () {
-        isEditable = !isEditable; // Toggle edit mode
-        const inputs = profileInfoContainer.querySelectorAll("input, select");
-        inputs.forEach(input => {
-            if (input.id !== "username") {
-                input.readOnly = !isEditable;
-                input.disabled = !isEditable;
-            }
-        });
+    // console.log(userData);
 
-        updateProfileButton.textContent = isEditable ? "Save Changes" : "Update Profile";
+    if (userData.error) {
+      throw new Error(userData.error);
+    }
 
-        if (!isEditable) {
-            // Save the updated data
-            const updatedProfile = {
-                username: profilesData[role].username, // Username remains unchanged
-                name: document.getElementById("name").value,
-                mobile: document.getElementById("mobile").value,
-                dob: document.getElementById("dob").value,
-                password: document.getElementById("password").value,
-                gender: document.getElementById("gender").value,
-            };
+    // Update the DOM with user data
+    usernameDisplay.textContent = userData.name || "Unknown User";
 
-            // Add role-specific data
-            if (role === "student") {
-                updatedProfile.attendance = document.getElementById("attendance").textContent;
-            } else if (role === "teacher") {
-                updatedProfile.subject = document.getElementById("subject").value;
-                updatedProfile.experience = document.getElementById("experience").value;
-            }
+    let formattedDOB = "N/A"; // Default value for DOB
+    if (userData.Date_of_birth) {
+      const dob = new Date(userData.Date_of_birth);
+      const options = { day: "numeric", month: "short", year: "numeric" };
+      formattedDOB = dob.toLocaleDateString("en-GB", options);
+    }
+    // console.log(userData);
+    profileInfo.innerHTML = `
+          <p><strong>Username:</strong> ${userData.email || "N/A"}</p>
+          <p><strong>Full Name:</strong> ${userData.name || "N/A"}</p>
+          <p><strong>Email:</strong> ${userData.email || "N/A"}</p>
+          <p><strong>Contact No:</strong> ${userData.mob_No || "N/A"}</p>
+          <p><strong>Roll No:</strong> ${userData.rollNo || "N/A"}</p>
+          <p><strong>DOB :</strong> ${formattedDOB || "N/A"}</p>
+        `;
+  } catch (error) {
+    console.error("Error fetching user data:", error);
+    alert(
+      "An error occurred while fetching user data. Redirecting to the login page."
+    );
+    window.location.href = "login.html";
+  }
 
-            // Save updated data to profilesData (simulate saving to a database)
-            profilesData[role] = updatedProfile;
-
-            console.log("Profile updated:", profilesData[role]);
-        }
-    });
+  // Logout functionality
+  const logoutBtn = document.getElementById("logout-btn");
+  logoutBtn.addEventListener("click", function () {
+    window.location.href = "login.html";
+  });
 });
